@@ -1,0 +1,23 @@
+# harness / core
+httpx>=0.27
+pydantic>=2.7
+python-dotenv>=1.0
+
+# rag
+lancedb>=0.13
+rank-bm25>=0.2.2
+sentence-transformers>=3.0
+numpy>=1.26
+
+# ingestion
+pandas>=2.2
+tqdm>=4.66
+ijson>=3.3
+
+# api / web
+fastapi>=0.115
+uvicorn[standard]>=0.30
+sse-starlette>=2.1
+
+# evals
+pytest>=8.0
