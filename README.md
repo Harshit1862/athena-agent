@@ -56,6 +56,30 @@ Hardware assumed for dev: RTX 5060 Ti (8 GB VRAM), 16 GB RAM. Kept
 intentionally light (embedded vector store, CPU reranker, no external DB
 server) so testing isn't hardware-locked beyond "one consumer GPU."
 
+## Getting started
+
+Requires [Ollama](https://ollama.com) running locally (dev default) or an
+OpenAI-compatible endpoint (production).
+
+```bash
+pip install -r requirements.txt
+cp .env.example .env            # defaults to local Ollama; edit for a hosted endpoint
+
+# dev only — pull the local models
+ollama pull qwen3:8b
+ollama pull nomic-embed-text
+
+# one-time: pull the arXiv corpus, then build the dense+sparse indexes
+python -m ingestion.fetch_arxiv
+python -m ingestion.build_index
+
+# CLI chat, with every reasoning step printed
+python main.py
+
+# API + web UI (chat with a live trace panel) at http://localhost:8000
+uvicorn api.main:app --reload
+```
+
 ## Repo layout
 
 - `harness/` — agent loop, tool-call protocol, LLM client interface (from scratch)
